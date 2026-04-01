@@ -1,0 +1,87 @@
+/* Import base styles */
+@import url('inventory.css');
+
+/* Supplier-specific styles - all inherited from inventory.css */
+
+/* Additional supplier catalog styles */
+.btn-secondary {
+    background: linear-gradient(135deg, #444, #333);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #555, #444);
+    transform: translateY(-2px);
+}
+
+.btn-save {
+    background: linear-gradient(135deg, #28a745, #20c997) !important;
+}
+
+.btn-save:hover {
+    background: linear-gradient(135deg, #20c997, #28a745) !important;
+}
+
+#catalogSection {
+    margin-top: 30px;
+    border: 2px solid rgba(229, 9, 20, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+#catalogSection .table-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+/* PO Items table in modal */
+#poItemsTableBody tr td {
+    padding: 10px 12px;
+}
+
+#poModal .inventory-table {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+#poModal .inventory-table thead th {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px 12px;
+}
+
+/* Modal form inputs */
+.modal-content select,
+.modal-content input[type="number"],
+.modal-content input[type="text"],
+.modal-content input[type="date"] {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.modal-content select:focus,
+.modal-content input:focus {
+    border-color: #e50914;
+    outline: none;
+}
+
+/* PO Details Modal styles */
+#poDetailsContent p {
+    margin: 8px 0;
+    color: #ccc;
+}
+
+#poDetailsContent p strong {
+    color: white;
+}

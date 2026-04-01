@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <link rel="stylesheet" href="../static/css/order-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Anime Store - Order Details</title>
+</head>
+
+<body>
+    <!-- Background -->
+    <div class="background-wrapper">
+        <img src="../static/images/home-background.gif" alt="Anime Background" class="background-image">
+        <div class="background-overlay"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="home.html" class="nav-link">HOME</a>
+                <a href="products.html" class="nav-link">PRODUCTS</a>
+                <a href="orders.html" class="nav-link active">MY ORDERS</a>
+            </div>
+            <div class="nav-center">
+                <img src="../static/images/logo.png" alt="Anime Store Logo" class="nav-logo">
+            </div>
+            <div class="nav-right">
+                <a href="profile.html" class="nav-link">MY PROFILE</a>
+                <button class="icon-btn cart-btn" onclick="window.location.href='cart.html'">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+                <div class="profile-dropdown">
+                    <button class="icon-btn profile-btn" onclick="toggleProfileDropdown(event)">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                        </svg>
+                    </button>
+                    <div class="profile-dropdown-menu" id="profileDropdown">
+                        <a href="profile.html" class="dropdown-item">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            Profile
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item logout-item" onclick="logout(event)">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Back Button -->
+            <a href="orders.html" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                Back to Orders
+            </a>
+
+            <!-- Order Header -->
+            <div class="order-header-section">
+                <div class="order-title">
+                    <h1>Order <span id="orderNumber">#0</span></h1>
+                    <div class="order-status" id="orderStatus">PAID</div>
+                </div>
+                <div class="order-meta">
+                    <div class="meta-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        <span id="orderDate">January 17, 2026</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Grid -->
+            <div class="order-details-grid">
+                <!-- Left Column -->
+                <div class="left-column">
+<!-- Order Items -->
+<div class="card items-card">
+    <div class="items-header">
+        <h2>Order Items</h2>
+        <div class="edit-controls" id="editControls" style="display: none;">
+            <button class="btn-edit-mode" id="btnAddProduct" onclick="openAddProductModal()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Add Product
+            </button>
+            <button class="btn-edit-mode btn-delete" id="btnDeleteSelected" onclick="deleteSelectedItems()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                </svg>
+                Delete Selected
+            </button>
+        </div>
+    </div>
+
+    <div class="order-items" id="orderItems">
+        <!-- Items will be populated by JS -->
+    </div>
+</div>
+
+
+                </div>
+
+                <!-- Right Column -->
+                <div class="right-column">
+                    <!-- Order Summary -->
+                    <div class="card summary-card">
+                        <h2>Order Summary</h2>
+                        <div class="summary-details">
+                            <div class="summary-row">
+                                <span>Subtotal</span>
+                                <span id="subtotal">$0.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Shipping</span>
+                                <span id="shipping">FREE</span>
+                            </div>
+                            <div class="summary-divider"></div>
+                            <div class="summary-row total">
+                                <span>Total</span>
+                                <span id="total">$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Address -->
+                    <div class="card address-card">
+                        <h2>Shipping Address</h2>
+                        <p id="shippingAddress">Loading...</p>
+                    </div>
+
+                    <!-- Order Actions -->
+                    <div class="card actions-card">
+                        <h2>Order Actions</h2>
+                        <div class="action-buttons">
+                            <button class="btn-action btn-reorder" onclick="reorderItems()">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="23 4 23 10 17 10"></polyline>
+                                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                                </svg>
+                                Reorder Items
+                            </button>
+                            <button class="btn-action btn-refund" id="btnRefund" onclick="requestRefund()" style="display: none;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                                Request Refund
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- Cancel Items Modal -->
+    <div class="modal" id="cancelModal">
+        <div class="modal-overlay" onclick="closeCancelModal()"></div>
+        <div class="modal-content cancel-modal-content">
+            <button class="modal-close" onclick="closeCancelModal()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="modal-header">
+                <h2 id="cancelModalTitle">Cancel Items</h2>
+                <p>Order <span id="cancelOrderNumber">#0</span></p>
+            </div>
+            <div class="modal-body">
+                <!-- Items to Cancel -->
+                <div class="cancel-items-section">
+                    <h3>Items to Cancel</h3>
+                    <div class="cancel-items-list" id="cancelItemsList">
+                        <!-- Items will be populated by JS -->
+                    </div>
+                </div>
+
+                <div class="cancel-warning">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                        <line x1="12" y1="9" x2="12" y2="13"></line>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <div>
+                        <strong>Are you sure?</strong>
+                        <p>Cancelled items cannot be recovered.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeCancelModal()">Keep Items</button>
+                <button class="btn-danger" id="confirmCancelBtn" onclick="confirmCancelItems()">Cancel Items</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div class="modal" id="addProductModal">
+        <div class="modal-overlay" onclick="closeAddProductModal()"></div>
+        <div class="modal-content add-product-modal-content">
+            <button class="modal-close" onclick="closeAddProductModal()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="modal-header">
+                <h2>Add Product to Order</h2>
+                <p>Order <span id="addProductOrderNumber">#0</span></p>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Search Product</label>
+                    <input type="text" id="productSearch" class="form-control" placeholder="Search by product name..." oninput="searchProducts(this.value)">
+                </div>
+
+                <div class="products-list" id="productsList">
+                    <!-- Products will be populated by JS -->
+                </div>
+
+                <div class="selected-product" id="selectedProductSection" style="display: none;">
+                    <h3>Selected Product</h3>
+                    <div class="selected-product-info" id="selectedProductInfo"></div>
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        <div class="quantity-selector">
+                            <button type="button" onclick="adjustQuantity(-1)">-</button>
+                            <input type="number" id="productQuantity" value="1" min="1" max="99">
+                            <button type="button" onclick="adjustQuantity(1)">+</button>
+                        </div>
+                        <small>Available: <span id="availableStock">0</span></small>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeAddProductModal()">Cancel</button>
+                <button class="btn-primary" id="confirmAddProductBtn" onclick="confirmAddProduct()" disabled>Add to Order</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <a href="home.html">
+                        <img src="../static/images/logo.png" alt="Anime Store Logo" class="footer-logo">
+                    </a>
+                    <p>Your destination for exclusive anime merchandise and collectibles.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="orders.html">My Orders</a></li>
+                        <li><a href="profile.html">My Profile</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="products.html?category=2">Figures</a></li>
+                        <li><a href="products.html?category=1">Clothing</a></li>
+                        <li><a href="products.html?category=3">Posters</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Anime Store. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../static/js/route-guard.js"></script>
+    <script src="../static/js/order-details.js"></script>
+    <script>
+        enforceRouteGuard('customer');
+    </script>
+</body>
+
+</html>
+

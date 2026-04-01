@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Anime Store - Login</title>
+</head>
+
+<body>
+    <!-- Full-screen anime collage background -->
+    <div class="background-wrapper">
+        <img src="../static/images/anime-collage.jpg" alt="Anime Background" class="background-image">
+        <div class="background-overlay"></div>
+    </div>
+
+    <!-- Character animations -->
+    <div id="eren" class="character">
+        <div class="character-sprite eren-sprite"></div>
+    </div>
+    <div id="goku" class="character">
+        <div class="character-sprite goku-sprite"></div>
+    </div>
+
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form method="POST" action="/register" id="signupForm">
+                <h1>Join Our Community</h1>
+                <span>Enter your details to get started</span>
+                <input type="text" name="name" id="signup-name" placeholder="Username" required />
+                <input type="email" name="email" id="signup-email" placeholder="Email Address" required />
+                <input type="tel" name="phone" id="signup-phone" placeholder="Phone Number (Optional)" />
+                <input type="text" name="address" id="signup-address" placeholder="Shipping Address (Optional)" />
+                <input type="password" name="password" id="signup-password" placeholder="Create Password" required />
+                <div class="password-strength" id="password-strength"></div>
+                <label class="checkbox-label">
+                    <input type="checkbox" required />
+                    <span>I agree to the Terms & Conditions</span>
+                </label>
+                <button type="submit">CREATE ACCOUNT</button>
+            </form>
+        </div>
+
+        <div class="form-container sign-in-container">
+            <form method="POST" action="/login" id="loginForm">
+                <h1>Welcome Back</h1>
+                <span>Login to access your collection</span>
+                <input type="text" name="username" id="login-email" placeholder="Email Address" required />
+                <input type="password" name="password" id="login-password" placeholder="Password" required />
+                <a href="#" class="forgot-link">Forgot Your Password?</a>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="remember-me" />
+                    <span>Remember me</span>
+                </label>
+                <button type="submit">LOGIN</button>
+            </form>
+        </div>
+
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <img src="../static/images/logo.png" alt="Anime Store Logo" class="logo-image">
+                    <h1>Already a Member?</h1>
+                    <p>Sign in to explore exclusive anime merchandise and join our community</p>
+                    <button class="ghost" id="signIn">SIGN IN</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <img src="../static/images/logo.png" alt="Anime Store Logo" class="logo-image">
+                    <h1>New Here?</h1>
+                    <p>Create an account to discover amazing anime collectibles and exclusive deals</p>
+                    <button class="ghost" id="signUp">JOIN NOW</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../static/js/api-service.js"></script>
+    <script src="../static/js/login.js"></script>
+</body>
+
+</html>

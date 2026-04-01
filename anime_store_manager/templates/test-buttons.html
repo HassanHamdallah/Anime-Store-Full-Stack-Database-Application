@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .test-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        button {
+            background: #e50914;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        button:hover {
+            background: #c40812;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 255, 0, 0.1);
+            border-left: 4px solid #0f0;
+            border-radius: 5px;
+        }
+
+        .error {
+            background: rgba(255, 0, 0, 0.1);
+            border-left: 4px solid #f00;
+        }
+
+        pre {
+            background: #000;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🧪 Button Functionality Test Page</h1>
+
+    <div class="test-section">
+        <h2>Step 1: Check if Functions Exist</h2>
+        <button onclick="checkFunctions()">Check Functions</button>
+        <div id="functionCheck"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Step 2: Test Modal Elements</h2>
+        <button onclick="checkModals()">Check Modals</button>
+        <div id="modalCheck"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Step 3: Test API Endpoints</h2>
+        <button onclick="testSupplierAPI()">Test Supplier API</button>
+        <button onclick="testStaffAPI()">Test Staff API</button>
+        <button onclick="testProductAPI()">Test Product API</button>
+        <div id="apiCheck"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Step 4: Navigation Links</h2>
+        <a href="/suppliers.html"><button>Go to Suppliers Page</button></a>
+        <a href="/staff.html"><button>Go to Staff Page</button></a>
+        <a href="/inventory.html"><button>Go to Inventory Page</button></a>
+    </div>
+
+    <script>
+        function checkFunctions() {
+            const result = document.getElementById('functionCheck');
+            let html = '<div class="result"><h3>Function Check Results:</h3><pre>';
+
+            const checks = [
+                { name: 'window.openSupplierModal', exists: typeof window.openSupplierModal === 'function' },
+                { name: 'window.openStaffModal', exists: typeof window.openStaffModal === 'function' },
+                { name: 'window.openProductModal', exists: typeof window.openProductModal === 'function' }
+            ];
+
+            checks.forEach(check => {
+                const status = check.exists ? '✅' : '❌';
+                html += `${status} ${check.name}: ${check.exists ? 'EXISTS' : 'NOT FOUND'}\n`;
+            });
+
+            html += '</pre></div>';
+            result.innerHTML = html;
+        }
+
+        function checkModals() {
+            const result = document.getElementById('modalCheck');
+            let html = '<div class="result"><h3>Modal Element Check:</h3><pre>';
+
+            const modals = [
+                { name: 'supplierModal', id: 'supplierModal' },
+                { name: 'staffModal', id: 'staffModal' },
+                { name: 'productModal', id: 'productModal' }
+            ];
+
+            modals.forEach(modal => {
+                const exists = document.getElementById(modal.id) !== null;
+                const status = exists ? '✅' : '❌';
+                html += `${status} ${modal.name}: ${exists ? 'EXISTS' : 'NOT FOUND'}\n`;
+            });
+
+            html += '</pre></div>';
+            result.innerHTML = html;
+        }
+
+        async function testSupplierAPI() {
+            const result = document.getElementById('apiCheck');
+            result.innerHTML = '<div class="result">Testing Supplier API...</div>';
+
+            try {
+                const response = await fetch('/api/manager/suppliers');
+                const data = await response.json();
+                result.innerHTML = `<div class="result">
+                    <h3>✅ Supplier API Working!</h3>
+                    <p>Status: ${response.status}</p>
+                    <p>Suppliers found: ${data.length}</p>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                </div>`;
+            } catch (error) {
+                result.innerHTML = `<div class="result error">
+                    <h3>❌ Supplier API Failed</h3>
+                    <p>Error: ${error.message}</p>
+                </div>`;
+            }
+        }
+
+        async function testStaffAPI() {
+            const result = document.getElementById('apiCheck');
+            result.innerHTML = '<div class="result">Testing Staff API...</div>';
+
+            try {
+                const response = await fetch('/api/manager/staff');
+                const data = await response.json();
+                result.innerHTML = `<div class="result">
+                    <h3>✅ Staff API Working!</h3>
+                    <p>Status: ${response.status}</p>
+                    <p>Staff members found: ${data.length}</p>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                </div>`;
+            } catch (error) {
+                result.innerHTML = `<div class="result error">
+                    <h3>❌ Staff API Failed</h3>
+                    <p>Error: ${error.message}</p>
+                </div>`;
+            }
+        }
+
+        async function testProductAPI() {
+            const result = document.getElementById('apiCheck');
+            result.innerHTML = '<div class="result">Testing Product/Inventory API...</div>';
+
+            try {
+                const response = await fetch('/api/manager/inventory');
+                const data = await response.json();
+                result.innerHTML = `<div class="result">
+                    <h3>✅ Inventory API Working!</h3>
+                    <p>Status: ${response.status}</p>
+                    <p>Products found: ${data.length}</p>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                </div>`;
+            } catch (error) {
+                result.innerHTML = `<div class="result error">
+                    <h3>❌ Inventory API Failed</h3>
+                    <p>Error: ${error.message}</p>
+                </div>`;
+            }
+        }
+
+        // Auto-run checks on page load
+        window.addEventListener('load', function () {
+            console.log('Test page loaded');
+            console.log('You can run checkFunctions(), checkModals(), or test API functions');
+        });
+    </script>
+</body>
+
+</html>

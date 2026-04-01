@@ -1,0 +1,125 @@
+/* Import base styles */
+@import url('manager-dashboard.css');
+
+/* Analytics-specific styles */
+.category-revenue-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.category-revenue-item {
+    padding: 15px;
+    background: rgba(20, 20, 20, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.category-revenue-item:hover {
+    background: rgba(20, 20, 20, 0.7);
+    border-color: rgba(229, 9, 20, 0.3);
+}
+
+.category-revenue-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.category-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.category-revenue {
+    font-size: 16px;
+    font-weight: 700;
+    color: #e50914;
+}
+
+.category-progress-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.category-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #e50914, #ff6b35);
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+
+.category-percentage {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.analytics-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.analytics-table th {
+    text-align: left;
+    padding: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.analytics-table td {
+    padding: 15px 12px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.analytics-table tr:hover {
+    background: rgba(229, 9, 20, 0.05);
+}
+
+.top-customers-card {
+    grid-column: span 6;
+}
+
+.product-performance-card {
+    grid-column: span 6;
+}
+
+.btn-export {
+    background: linear-gradient(135deg, rgba(229, 9, 20, 0.2), rgba(229, 9, 20, 0.1));
+    border: 2px solid rgba(229, 9, 20, 0.3);
+    color: #e50914;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-export:hover {
+    background: linear-gradient(135deg, rgba(229, 9, 20, 0.3), rgba(229, 9, 20, 0.15));
+    border-color: #e50914;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 1400px) {
+
+    .top-customers-card,
+    .product-performance-card {
+        grid-column: span 12;
+    }
+}

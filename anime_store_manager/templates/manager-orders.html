@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/manager-orders.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Anime Store - Order Management</title>
+</head>
+
+<body>
+    <div class="background-wrapper">
+        <img src="../static/images/home-background.gif" alt="Anime Background" class="background-image">
+        <div class="background-overlay"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="manager-dashboard.html" class="nav-link">DASHBOARD</a>
+                <a href="inventory.html" class="nav-link">INVENTORY</a>
+                <a href="manager-orders.html" class="nav-link active">ORDERS</a>
+                <a href="staff.html" class="nav-link">STAFF</a>
+            </div>
+            <div class="nav-center">
+                <img src="../static/images/logo.png" alt="Anime Store Logo" class="nav-logo">
+            </div>
+            <div class="nav-right">
+                <a href="suppliers.html" class="nav-link">SUPPLIERS</a>
+                <div class="profile-dropdown-container">
+                    <button class="icon-btn" id="profileBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                        </svg>
+                    </button>
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <a href="staff.html" class="dropdown-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            My Profile
+                        </a>
+                        <a href="login.html" class="dropdown-item logout-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Order Management</h1>
+                    <p class="page-subtitle">Process and manage customer orders</p>
+                </div>
+            </div>
+
+            <div class="orders-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalOrders">0</h3>
+                        <p>Total Orders</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalRevenue">$0</h3>
+                        <p>Total Revenue</p>
+                    </div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="stat-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="pendingOrders">0</h3>
+                        <p>Pending Orders</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filters-section">
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <label>Status</label>
+                        <select id="statusFilter" class="filter-select">
+                            <option value="all">All Orders</option>
+                            <option value="Paid">New Order (Paid)</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Shipped">Shipped</option>
+                            <option value="Delivered">Delivered</option>
+                            <option value="Cancelled">Cancelled/Refunded</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Search</label>
+                        <input type="text" id="searchInput" class="filter-input"
+                            placeholder="Search orders or customers...">
+                    </div>
+                </div>
+            </div>
+
+            <div class="inventory-table-section">
+                <div class="table-header">
+                    <h2>All Orders</h2>
+                </div>
+                <div class="table-wrapper">
+                    <table class="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Items</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTableBody">
+                            <!-- Rows will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Anime Store Manager Portal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fulfillment Modal -->
+    <div id="fulfillmentModal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2>Order Fulfillment</h2>
+                <button class="close-btn" onclick="closeFulfillmentModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="order-summary">
+                    <p><strong>Order #:</strong> <span id="fulfillmentOrderId"></span></p>
+                </div>
+                
+                <div class="fulfillment-items" id="fulfillmentItems">
+                    <!-- Items will be populated here -->
+                </div>
+                
+                <div class="allocate-section" id="allocateSection">
+                    <h3>Allocate Inventory</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="allocateProduct">Product</label>
+                            <select id="allocateProduct" onchange="loadWarehousesForProduct()">
+                                <option value="">Select product...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="allocateWarehouse">Warehouse</label>
+                            <select id="allocateWarehouse">
+                                <option value="">Select warehouse...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="allocateQty">Quantity</label>
+                            <input type="number" id="allocateQty" min="1" value="1">
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary" onclick="allocateInventory()">Allocate</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="current-allocations" id="currentAllocations">
+                    <h3>Current Allocations</h3>
+                    <table class="allocation-table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Warehouse</th>
+                                <th>Quantity</th>
+                                <th>Fulfilled At</th>
+                            </tr>
+                        </thead>
+                        <tbody id="allocationsTableBody">
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" onclick="syncAllocations()" title="Clean up allocations for removed items">Sync Allocations</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeFulfillmentModal()">Close</button>
+                    <button type="button" class="btn btn-success" id="completeShipBtn" onclick="completeShipment()">Mark as Shipped</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../static/js/route-guard.js"></script>
+    <script src="../static/js/api-service.js"></script>
+    <script src="../static/js/data-mapper.js"></script>
+    <script src="../static/js/manager-orders.js"></script>
+    <script>
+        // Enforce route guard for manager pages
+        enforceRouteGuard('manager');
+    </script>
+</body>
+
+</html>

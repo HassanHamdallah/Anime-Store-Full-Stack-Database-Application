@@ -1,0 +1,621 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background-color: #000000;
+}
+
+/* Full-screen anime collage background with dark overlay */
+.background-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.1s ease-out;
+}
+
+.background-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+}
+
+/* Character animations */
+.character {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  z-index: 999;
+  transition: left 0.1s linear, right 0.1s linear;
+}
+
+.character-sprite {
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: drop-shadow(0 0 25px rgba(229, 9, 20, 0.7));
+}
+
+#eren {
+  left: -200px;
+  bottom: 50%;
+  transform: translateY(50%);
+}
+
+#goku {
+  right: -200px;
+  bottom: 50%;
+  transform: translateY(50%);
+}
+
+.goku-sprite {
+  background-image: url('../images/goku.gif');
+}
+
+.eren-sprite {
+  background-image: url('../images/eren.gif');
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.shake-animation {
+  animation: shake 0.3s ease-in-out 2;
+}
+
+/* Typography */
+h1 {
+  font-weight: 700;
+  margin: 0 0 20px;
+  font-size: 32px;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+p {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+  margin: 20px 0 30px;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+span {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 15px 0;
+  display: block;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+a {
+  color: #ffffff;
+  font-size: 13px;
+  text-decoration: none;
+  transition: 0.3s ease;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+a:hover {
+  color: #e50914;
+}
+
+/* Social login icons */
+.social-container {
+  margin: 20px 0;
+}
+
+.social-container a {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+  height: 40px;
+  width: 40px;
+  transition: 0.3s ease;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.social-container a:hover {
+  border-color: #e50914;
+  color: #e50914;
+  transform: translateY(-2px);
+}
+
+/* Netflix-inspired red buttons */
+button {
+  border-radius: 20px;
+  border: none;
+  background: #e50914;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(229, 9, 20, 0.5);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  margin-top: 15px;
+}
+
+button:hover {
+  background: #f40612;
+  box-shadow: 0 8px 25px rgba(229, 9, 20, 0.7);
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button.ghost {
+  background: rgba(229, 9, 20, 0.15);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+button.ghost:hover {
+  background: #e50914;
+  border-color: #e50914;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(229, 9, 20, 0.6);
+}
+
+/* Form styling */
+form {
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 50px;
+  height: 100%;
+  text-align: center;
+}
+
+/* Enhanced input fields */
+input {
+  background: rgba(20, 20, 20, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 100%;
+  font-size: 13px;
+  transition: all 0.3s ease;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+input[type="checkbox"] {
+  width: auto;
+  margin: 0 8px 0 0;
+  cursor: pointer;
+  accent-color: #e50914;
+}
+
+input:focus {
+  outline: none;
+  background: rgba(30, 30, 30, 0.9);
+  border-color: #e50914;
+  box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.25),
+              0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  margin: 12px 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.sign-up-container .checkbox-label {
+  margin: 8px 0;
+  font-size: 12px;
+}
+
+.checkbox-label span {
+  margin: 0;
+  display: inline;
+}
+
+.forgot-link {
+  margin: 15px 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.forgot-link:hover {
+  color: #e50914;
+  text-decoration: underline;
+}
+
+/* Logo image styling */
+.logo-image {
+  width: auto;
+  height: 100px;
+  max-width: 250px;
+  margin-bottom: 15px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  transition: transform 0.3s ease;
+}
+
+.logo-image:hover {
+  transform: scale(1.05);
+}
+
+/* Container with rounded corners - with dark blur effect */
+.container {
+  background: rgba(10, 10, 10, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(229, 9, 20, 0.25);
+  border-radius: 15px;
+  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.5),
+              0 0 80px rgba(229, 9, 20, 0.1),
+              inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+  width: 768px;
+  max-width: 100%;
+  min-height: 480px;
+  z-index: 1;
+}
+
+.form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+}
+
+.sign-in-container {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+  opacity: 1;
+  pointer-events: auto;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.sign-in-container h1 {
+  color: #ffffff;
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.sign-in-container span {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  margin: 10px 0 20px 0;
+}
+
+.container.right-panel-active .sign-in-container {
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sign-up-container {
+  left: 0;
+  width: 50%;
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  padding: 30px 0;
+}
+
+.sign-up-container h1 {
+  color: #ffffff;
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+.sign-up-container span {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  margin: 5px 0 15px 0;
+}
+
+.sign-up-container form {
+  padding: 0 40px;
+}
+
+.sign-up-container input {
+  margin: 6px 0;
+  padding: 10px 15px;
+}
+
+.sign-up-container button {
+  margin-top: 10px;
+  padding: 11px 40px;
+}
+
+.container.right-panel-active .sign-up-container {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: show 0.6s;
+  pointer-events: auto;
+}
+
+@keyframes show {
+  0%, 49.99% {
+    opacity: 0;
+    z-index: 1;
+  }
+  50%, 100% {
+    opacity: 1;
+    z-index: 5;
+  }
+}
+
+/* Flat red overlay panel - no curves */
+.overlay-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+  z-index: 100;
+}
+
+.container.right-panel-active .overlay-container {
+  transform: translateX(-100%);
+}
+
+.overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(229, 9, 20, 0.3) 0%,
+    rgba(139, 0, 0, 0.35) 100%
+  );
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  color: #ffffff;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+
+.container.right-panel-active .overlay {
+  transform: translateX(50%);
+}
+
+.overlay-panel {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  text-align: center;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+
+.overlay-panel h1 {
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.overlay-panel p {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 25px;
+  opacity: 0.95;
+}
+
+.overlay-left {
+  transform: translateX(-20%);
+}
+
+.container.right-panel-active .overlay-left {
+  transform: translateX(0);
+}
+
+.overlay-right {
+  right: 0;
+  transform: translateX(0);
+}
+
+.container.right-panel-active .overlay-right {
+  transform: translateX(20%);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+    min-height: 600px;
+    border-radius: 12px;
+  }
+
+  form {
+    padding: 0 30px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .overlay-panel {
+    padding: 0 25px;
+  }
+
+  .overlay-panel h1 {
+    font-size: 26px;
+  }
+
+  .overlay-panel p {
+    font-size: 13px;
+  }
+
+  .logo-image {
+    height: 80px;
+    max-width: 200px;
+  }
+
+  .character {
+    display: none;
+  }
+
+  .background-image {
+    object-position: 30% center;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    border-radius: 10px;
+  }
+
+  form {
+    padding: 0 20px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  button {
+    padding: 10px 35px;
+    font-size: 11px;
+  }
+
+  .logo-image {
+    height: 70px;
+    max-width: 180px;
+  }
+}
+/* Password Strength Indicator */
+.password-strength {
+  width: 0%;
+  height: 4px;
+  border-radius: 2px;
+  margin: 4px 0 8px 0;
+  transition: all 0.3s ease;
+  display: none;
+  text-align: center;
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 4px;
+  padding-top: 1px;
+}
+
+.sign-up-container .password-strength {
+  margin: 3px 0 5px 0;
+  height: 3px;
+}
+
+/* Password Requirements */
+.password-requirements {
+  width: 100%;
+  text-align: left;
+  margin: 8px 0 12px 0;
+  padding: 12px;
+  background: rgba(20, 20, 20, 0.5);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.password-requirements small {
+  display: block;
+  margin: 4px 0;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s ease;
+}
+
+.password-requirements small:first-child {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 8px;
+}
+
+.requirement {
+  padding-left: 8px;
+}
+
+/* Additional spacing for signup form with extra fields */
+.sign-up-container input {
+  margin: 6px 0;
+}
+
+.sign-up-container form {
+  padding: 0 40px;
+}

@@ -1,0 +1,21 @@
+/* Import base styles */
+@import url('inventory.css');
+
+/* Staff-specific status badge */
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-badge.active {
+    background: rgba(0, 255, 135, 0.15);
+    color: #00ff87;
+}
+
+.status-badge.inactive {
+    background: rgba(255, 107, 53, 0.15);
+    color: #ff6b35;
+}

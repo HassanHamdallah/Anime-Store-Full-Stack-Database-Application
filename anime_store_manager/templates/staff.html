@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/staff.css?v=FINAL_FIX_2">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Anime Store - Staff Management</title>
+</head>
+
+<body>
+    <div class="background-wrapper">
+        <img src="../static/images/home-background.gif" alt="Anime Background" class="background-image">
+        <div class="background-overlay"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="manager-dashboard.html" class="nav-link">DASHBOARD</a>
+                <a href="inventory.html" class="nav-link">INVENTORY</a>
+                <a href="manager-orders.html" class="nav-link">ORDERS</a>
+                <a href="staff.html" class="nav-link active">STAFF</a>
+            </div>
+            <div class="nav-center">
+                <img src="../static/images/logo.png" alt="Anime Store Logo" class="nav-logo">
+            </div>
+            <div class="nav-right">
+                <a href="suppliers.html" class="nav-link">SUPPLIERS</a>
+                <div class="profile-dropdown-container">
+                    <button class="icon-btn" id="profileBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                        </svg>
+                    </button>
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <a href="staff.html" class="dropdown-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            My Profile
+                        </a>
+                        <a href="login.html" class="dropdown-item logout-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content" data-user-role="Manager" data-user-id="1">
+        <div class="container">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Staff Management</h1>
+                    <p class="page-subtitle">Manage employees and roles</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-add" id="addStaffBtn" data-manager-only="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Add Staff Member
+                    </button>
+                </div>
+            </div>
+
+            <div class="inventory-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalStaff">0</h3>
+                        <p>Total Staff</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalManagers">0</h3>
+                        <p>Managers</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filters-section">
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <label>Role</label>
+                        <select id="roleFilter" class="filter-select">
+                            <option value="all">All Roles</option>
+                            <option value="Manager">Manager</option>
+                            <option value="Employee">Employee</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Store/Warehouse</label>
+                        <select id="storeFilter" class="filter-select">
+                            <option value="all">All Locations</option>
+                            <!-- Populated by JS -->
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Search</label>
+                        <input type="text" id="searchInput" class="filter-input" placeholder="Search staff...">
+                    </div>
+                </div>
+            </div>
+
+            <div class="inventory-table-section">
+                <div class="table-header">
+                    <h2>Staff Members</h2>
+                </div>
+                <div class="table-wrapper">
+                    <table class="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>-</th> <!-- Placeholder for Last Name -->
+                                <th>Role</th>
+                                <th>Warehouses</th>
+                                <th>Manager</th>
+                                <th>Salary</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="staffTableBody">
+                            <!-- Rows will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Staff Modal -->
+    <div class="modal" id="staffModal">
+        <div class="modal-overlay" onclick="closeStaffModal()"></div>
+        <div class="modal-content product-modal">
+            <button class="modal-close" onclick="closeStaffModal()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <h2 id="staffModalTitle">Add Staff Member</h2>
+            <form id="staffForm" class="product-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="staffUsername">Username *</label>
+                        <input type="text" id="staffUsername" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="staffEmail">Email *</label>
+                        <input type="email" id="staffEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="staffPassword">Password *</label>
+                        <input type="password" id="staffPassword" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="staffRole">Role *</label>
+                        <select id="staffRole" name="role" required>
+                            <option value="">Select Role</option>
+                            <option value="Manager">Manager</option>
+                            <option value="Employee">Employee</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="staffSalary">Salary *</label>
+                        <input type="number" id="staffSalary" name="salary" step="0.01" required>
+                    </div>
+                </div>
+                <div class="form-group" id="warehouseAssignGroup" style="display: none; margin-top: 15px;">
+                    <label>Warehouse Access (select warehouses this employee can access)</label>
+                    <div id="warehouseCheckboxes" style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 10px; max-height: 200px; overflow-y: auto;">
+                        <!-- Checkboxes will be populated by JavaScript -->
+                        <span style="color: rgba(255,255,255,0.5);">Loading warehouses...</span>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" onclick="closeStaffModal()">Cancel</button>
+                    <button type="submit" class="btn-save">Save Staff Member</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Anime Store Manager Portal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../static/js/route-guard.js?v=FINAL_FIX"></script>
+    <script src="../static/js/api-service.js?v=FINAL_FIX"></script>
+    <script src="../static/js/data-mapper.js?v=FINAL_FIX"></script>
+    <script src="../static/js/staff.js?v=FINAL_FIX"></script>
+    <script>
+        // Enforce route guard for manager pages
+        try { enforceRouteGuard('manager'); } catch (e) { console.warn(e); }
+    </script>
+    <script>
+        // EMERGENCY FALLBACK: Inline Modal Opener
+        window.openStaffModal = function () {
+            console.log("Inline openStaffModal called");
+            const modal = document.getElementById('staffModal');
+            if (modal) {
+                modal.classList.add('active');
+                // Reset form if possible, but prioritize opening
+                const form = document.getElementById('staffForm');
+                if (form) form.reset();
+            } else {
+                console.error("Staff modal element not found!");
+                alert("Error: Staff modal not found.");
+            }
+        };
+    </script>
+</body>
+
+</html>

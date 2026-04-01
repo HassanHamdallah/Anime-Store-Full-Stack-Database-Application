@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Management - Anime Store</title>
+    <link rel="stylesheet" href="../static/css/manager.css">
+</head>
+<body>
+    <!-- Background -->
+    <div class="background-wrapper">
+        <img src="../static/images/anime-collage.jpg" alt="Anime Background" class="background-image">
+        <div class="background-overlay"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-container">
+                <img src="../static/images/logo.png" alt="Anime Store Logo" class="logo-img">
+                <span class="logo-text">Management</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#" class="active">Staff Management</a></li>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="staff-container">
+            <!-- Header Section -->
+            <div class="staff-header">
+                <h1 class="staff-title">Staff Management System</h1>
+                <button class="btn-add-staff" id="addStaffBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Add New Staff
+                </button>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search by name, email, account ID..." id="searchInput">
+                <button class="btn-search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    Search
+                </button>
+            </div>
+
+            <!-- Staff Table -->
+            <div class="table-wrapper">
+                <table class="staff-table">
+                    <thead>
+                        <tr>
+                            <th>Account ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Salary</th>
+                            <th>Created At</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="staffTableBody">
+                        <tr class="no-records">
+                            <td colspan="6">No records found</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add/Edit Staff Modal -->
+    <div class="modal" id="staffModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Staff</h2>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <form class="staff-form" id="staffForm">
+                <!-- Account ID field has been removed -->
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="salary">Salary</label>
+                    <input type="number" step="0.01" id="salary" required>
+                </div>
+                <div class="form-group">
+                    <label for="createdAt">Created At</label>
+                    <input type="date" id="createdAt" readonly>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn-submit">Save Staff</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../static/js/manager.js"></script>
+</body>
+</html>
